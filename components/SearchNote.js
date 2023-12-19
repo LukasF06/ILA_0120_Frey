@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Vibration, TouchableWithoutFeedback, Keyboard, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Vibration, TouchableWithoutFeedback, Keyboard, TextInput, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import React, {useState, useEffect, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -123,12 +123,12 @@ function SearchNote() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <TextInput style={styles.searchInput} placeholder='Suchen Sie nach einer Notiz...' value={searchedNote} onChangeText={(userInput) => {setSearchedNote(userInput)}}></TextInput>
-          <View style={styles.notesContainer}>
+          <ScrollView style={styles.notesContainer} contentContainerStyle={{alignItems: 'center'}}>
             {
               searchedNoteResults.length > 0 ? searchedNoteResults.map((note, index) => renderSearchResults(note, index))
               : <Text></Text>
             }
-          </View>
+          </ScrollView>
           <EditNote isVisible={editNoteVisible} onClose={onCloseEditNote} note={noteToEdit} reload={getData}></EditNote>
           <ShowDetails isVisible={detailsVisible} onClose={onCloseDetails} note={noteToShow}></ShowDetails>
           <StatusBar style="auto" />
@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
       width: '95%',
       //backgroundColor: '#c6c5c8',
       height: '82%',
-      alignItems: 'center',
       marginTop: '5%'
     },
     deleteButton: {
@@ -186,13 +185,13 @@ const styles = StyleSheet.create({
     noteBox: {
       backgroundColor: 'white',
       width: '98%',
-      height: '15%',
+      height: 100,
       borderRadius: 10,
       shadowColor: 'black',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.25,
       shadowRadius: 7,
-      marginTop: '3%',
+      marginTop: '5%',
       flexDirection: 'row',
       alignItems: 'center',
 

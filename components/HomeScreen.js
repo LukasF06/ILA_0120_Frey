@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Vibration } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Vibration, ScrollView } from 'react-native';
 import { AntDesign, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import React, {useState, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -85,7 +85,7 @@ function HomeScreen({navigation}) {
         
   return (
     <View style={styles.container}>
-      <View style={styles.notesContainer}>
+      <ScrollView style={styles.notesContainer} contentContainerStyle={{alignItems: 'center'}}>
       { savedNotes != null ? (
           savedNotes.map((data, index) => (
             <TouchableOpacity key={index} style={styles.noteBox} onPress={() => onShowDetails(data)}>
@@ -101,7 +101,7 @@ function HomeScreen({navigation}) {
         ) : (
           <Text></Text>
         )}
-      </View>
+      </ScrollView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Notiz erstellen')}><AntDesign name="plus" style={styles.plusIcon} /></TouchableOpacity>
         <TouchableOpacity style={styles.searchButton} onPress={() => navigation.navigate('Suche')}>
@@ -132,17 +132,14 @@ const styles = StyleSheet.create({
     },
     notesContainer: {
       width: '95%',
-      //backgroundColor: '#c6c5c8',
-      height: '75%',
-      marginTop: '2%',
-      alignItems: 'center',
-      marginTop: '13%'
+      height: '70%',
+      marginTop: '13%',
     },
     buttonContainer: {
       width: '95%',
       //backgroundColor: '#c6c5c8',
       height: '15%',
-      marginTop: '3%',
+      marginBottom: '5%',
       alignItems: 'center',
       flexDirection: 'row',
       justifyContent: 'space-evenly'
@@ -199,13 +196,13 @@ const styles = StyleSheet.create({
     noteBox: {
       backgroundColor: 'white',
       width: '98%',
-      height: '15%',
+      height: 100,
       borderRadius: 10,
       shadowColor: 'black',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.25,
       shadowRadius: 7,
-      marginTop: '3%',
+      marginTop: '5%',
       flexDirection: 'row',
       alignItems: 'center',
 
